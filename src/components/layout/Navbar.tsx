@@ -205,59 +205,98 @@ export default function Navbar({ categories }: NavbarProps) {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="sm:hidden bg-white border-t border-slate-200 px-4 py-4 space-y-4 shadow-lg">
-          <div className="flex flex-col gap-2">
-            <div className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-              অ্যাকাউন্ট
-            </div>
-            {user ? (
-              <div className="space-y-2">
-                <div className="p-3 bg-slate-50 rounded-xl flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-emerald-600 text-white font-bold flex items-center justify-center">
-                    {user.name ? user.name.slice(0, 1).toUpperCase() : "U"}
+        <>
+          <div
+            className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-40 sm:hidden"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+          <div className="relative z-50 sm:hidden bg-white border-t border-slate-200 px-4 py-4 space-y-4 shadow-xl">
+            <div className="flex flex-col gap-2">
+              <div className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                অ্যাকাউন্ট
+              </div>
+              {user ? (
+                <div className="space-y-2">
+                  <div className="p-3 bg-slate-50 rounded-xl flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-lg bg-emerald-600 text-white font-bold flex items-center justify-center">
+                      {user.name ? user.name.slice(0, 1).toUpperCase() : "U"}
+                    </div>
+                    <div className="overflow-hidden">
+                      <div className="text-sm font-semibold text-slate-800 truncate">{user.name}</div>
+                      <div className="text-xs text-slate-500 truncate">{user.email}</div>
+                    </div>
                   </div>
-                  <div className="overflow-hidden">
-                    <div className="text-sm font-semibold text-slate-800 truncate">{user.name}</div>
-                    <div className="text-xs text-slate-500 truncate">{user.email}</div>
+                  <div className="grid grid-cols-2 gap-2 pt-1">
+                    <Link
+                      href="/profile"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="py-2 px-3 rounded-lg bg-slate-100 text-xs font-medium text-slate-700 text-center"
+                    >
+                      প্রোফাইল
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={handleSignOut}
+                      className="py-2 px-3 rounded-lg bg-rose-50 text-xs font-medium text-rose-600 text-center cursor-pointer"
+                    >
+                      সাইন আউট
+                    </button>
                   </div>
                 </div>
-                <div className="grid grid-cols-2 gap-2 pt-1">
+              ) : (
+                <div className="grid grid-cols-2 gap-2">
                   <Link
-                    href="/profile"
+                    href="/signin"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="py-2 px-3 rounded-lg bg-slate-100 text-xs font-medium text-slate-700 text-center"
+                    className="py-2.5 px-3 rounded-xl border border-slate-200 text-sm font-medium text-center text-slate-700 hover:bg-slate-50"
                   >
-                    প্রোফাইল
+                    সাইন ইন
                   </Link>
-                  <button
-                    type="button"
-                    onClick={handleSignOut}
-                    className="py-2 px-3 rounded-lg bg-rose-50 text-xs font-medium text-rose-600 text-center"
+                  <Link
+                    href="/signup"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="py-2.5 px-3 rounded-xl bg-emerald-600 text-sm font-medium text-center text-white hover:bg-emerald-700"
                   >
-                    সাইন আউট
-                  </button>
+                    সাইন আপ
+                  </Link>
                 </div>
+              )}
+            </div>
+
+            <div className="pt-2 border-t border-slate-100">
+              <div className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
+                ক্যাটাগরি
               </div>
-            ) : (
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-2 gap-2 max-h-56 overflow-y-auto">
                 <Link
-                  href="/signin"
+                  href="/"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="py-2 px-3 rounded-xl border border-slate-200 text-sm font-medium text-center text-slate-700"
+                  className={`p-2 rounded-lg text-xs font-medium flex items-center gap-1.5 ${
+                    pathname === "/" ? "bg-emerald-50 text-emerald-800 font-bold" : "text-slate-600 hover:bg-slate-50"
+                  }`}
                 >
-                  সাইন ইন
+                  <span>🏠</span>
+                  <span>সব পণ্য</span>
                 </Link>
-                <Link
-                  href="/signup"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="py-2 px-3 rounded-xl bg-emerald-600 text-sm font-medium text-center text-white"
-                >
-                  সাইন আপ
-                </Link>
+                {categories.map((c) => (
+                  <Link
+                    key={c.id}
+                    href={`/category/${c.slug}`}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`p-2 rounded-lg text-xs font-medium flex items-center gap-1.5 ${
+                      pathname === `/category/${c.slug}`
+                        ? "bg-emerald-50 text-emerald-800 font-bold"
+                        : "text-slate-600 hover:bg-slate-50"
+                    }`}
+                  >
+                    <span>{c.icon}</span>
+                    <span>{c.nameBn}</span>
+                  </Link>
+                ))}
               </div>
-            )}
+            </div>
           </div>
-        </div>
+        </>
       )}
     </header>
   );
