@@ -2,8 +2,12 @@
 @plugin "daisyui";
 
 :root {
-  --background: #f8fafc;
-  --foreground: #0f172a;
+  --background: #fafcfa;
+  --foreground: #1d271f;
+  --primary: #05893e;
+  --primary-hover: #047f39;
+  --card-bg: #ffffff;
+  --border-color: #e1e8e1;
 }
 
 body {
@@ -30,4 +34,13 @@ body {
 
 .animate-marquee:hover {
   animation-play-state: paused;
+}
+
+/* Custom scrollbar hiding for horizontal category bar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

@@ -9,6 +9,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"),
   title: "বাজার দর (BazarDor) - প্রয়োজনীয় পণ্যের নিত্যদিনের বাজার দর",
   description:
     "নিত্যপ্রয়োজনীয় পণ্যের বাজার দর এক নজরে জানুন। স্বর্ণমাছি চাল, ডাল, তেল, সবজি, মাছ, মাংস ও ডিম-দুধের সর্বশেষ খুচরা ও পাইকারি মূল্যতালিকা।",

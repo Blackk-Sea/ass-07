@@ -65,7 +65,7 @@ export default function UpdateProfilePage() {
     return (
       <div className="flex-1 flex items-center justify-center py-24">
         <div className="text-center space-y-3">
-          <Loader2 className="w-8 h-8 animate-spin text-emerald-600 mx-auto" />
+          <Loader2 className="w-8 h-8 animate-spin text-[#05893e] mx-auto" />
           <p className="text-slate-500 text-sm">তথ্য লোড হচ্ছে...</p>
         </div>
       </div>
@@ -81,26 +81,26 @@ export default function UpdateProfilePage() {
       <div className="mb-6">
         <Link
           href="/profile"
-          className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-emerald-700 transition"
+          className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-600 hover:text-[#05893e] transition"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span>প্রোফাইলে ফিরুন</span>
+          <span>← প্রোফাইলে ফিরুন</span>
         </Link>
       </div>
 
-      <div className="bg-white rounded-2xl border border-slate-200/80 shadow-lg shadow-slate-100 p-8">
+      <div className="bg-white rounded-3xl border border-[#e1e8e1] shadow-lg shadow-slate-100 p-8">
         <div className="text-center mb-6">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-emerald-100 text-emerald-700 mb-3">
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-[#f0f5f0] text-[#05893e] mb-3 shadow-inner">
             <User className="w-6 h-6" />
           </div>
-          <h1 className="text-2xl font-bold text-slate-900">তথ্য আপডেট করুন</h1>
-          <p className="text-sm text-slate-500 mt-1">
-            আপনার অ্যাকাউন্টের তথ্যাদি হালনাগাদ করুন
+          <h1 className="text-2xl font-black text-[#1d271f]">তথ্য আপডেট</h1>
+          <p className="text-xs sm:text-sm text-slate-500 mt-1">
+            আপনার অ্যাকাউন্টের নাম ও তথ্য হালনাগাদ করুন
           </p>
         </div>
 
         {errorMessage && (
-          <div className="mb-5 p-3 rounded-lg bg-rose-50 border border-rose-200 text-rose-700 text-sm flex items-center gap-2">
+          <div className="mb-5 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs sm:text-sm flex items-center gap-2">
             <span>⚠️</span>
             <span>{errorMessage}</span>
           </div>
@@ -108,30 +108,30 @@ export default function UpdateProfilePage() {
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1.5">
+            <label className="block text-xs font-semibold text-slate-700 mb-1.5">
               ইমেইল (পরিবর্তনযোগ্য নয়)
             </label>
             <input
               type="email"
               value={session.user.email}
               disabled
-              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-100 text-slate-500 text-sm cursor-not-allowed"
+              className="w-full px-4 py-2.5 rounded-xl border border-[#e1e8e1] bg-slate-100 text-slate-500 text-sm cursor-not-allowed"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1.5">
-              নাম (Name)
+            <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+              নাম
             </label>
             <div className="relative">
-              <User className="w-5 h-5 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <User className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="আপনার পূর্ণ নাম"
+                placeholder="যেমন: রহিম উদ্দিন"
                 required
-                className="w-full pl-11 pr-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition text-sm text-slate-900 bg-slate-50/50 focus:bg-white"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#e1e8e1] focus:outline-none focus:ring-2 focus:ring-[#05893e]/20 focus:border-[#05893e] transition text-sm text-[#1d271f] bg-[#fafcfa] focus:bg-white"
               />
             </div>
           </div>
@@ -140,17 +140,17 @@ export default function UpdateProfilePage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 px-4 rounded-xl font-medium text-white bg-emerald-600 hover:bg-emerald-700 active:scale-[0.99] transition shadow-md shadow-emerald-600/20 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer"
+              className="w-full py-3 px-4 rounded-xl font-bold text-white bg-[#05893e] hover:bg-[#047f39] active:scale-[0.99] transition shadow-md shadow-[#05893e]/20 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer text-sm"
             >
               {loading ? (
                 <>
-                  <Loader2 className="w-5 h-5 animate-spin" />
+                  <Loader2 className="w-4 h-4 animate-spin" />
                   <span>আপডেট হচ্ছে...</span>
                 </>
               ) : (
                 <>
-                  <CheckCircle2 className="w-5 h-5" />
-                  <span>তথ্য আপডেট করুন</span>
+                  <CheckCircle2 className="w-4 h-4" />
+                  <span>আপডেট</span>
                 </>
               )}
             </button>

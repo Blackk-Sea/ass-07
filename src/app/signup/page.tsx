@@ -22,7 +22,7 @@ export default function SignUpPage() {
     setErrorMessage("");
 
     if (!name.trim()) {
-      const err = "অনুগ্রহ করে আপনার নাম প্রদান করুন।";
+      const err = "অনুগ্রহ করে আপনার নাম লিখুন।";
       setErrorMessage(err);
       toast.error(err);
       return;
@@ -36,7 +36,7 @@ export default function SignUpPage() {
     }
 
     if (password.length < 6) {
-      const err = "পাসওয়ার্ড ন্যূনতম ৬ অক্ষরের হতে হবে।";
+      const err = "পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে।";
       setErrorMessage(err);
       toast.error(err);
       return;
@@ -55,8 +55,7 @@ export default function SignUpPage() {
         setErrorMessage(errorText);
         toast.error(errorText);
       } else {
-        toast.success("অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে! অনুগ্রহ করে লগইন করুন।");
-        // As required: "If the user Register successfully then navigate him to his login page."
+        toast.success("অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে! অনুগ্রহ করে সাইন ইন করুন।");
         router.push("/signin");
       }
     } catch (err: unknown) {
@@ -76,7 +75,7 @@ export default function SignUpPage() {
         provider,
         callbackURL: "/",
       });
-      toast.success(`${provider === "google" ? "গুগল" : "গিটহাব"} এর মাধ্যমে সাইন ইন প্রক্রিয়া শুরু হয়েছে...`);
+      toast.success(`${provider === "google" ? "Google" : "GitHub"} দিয়ে চালিয়ে যান...`);
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : "সোশ্যাল লগইনে সমস্যা হয়েছে।";
       setErrorMessage(msg);
@@ -86,20 +85,22 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className="flex-1 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-emerald-50/50 via-slate-50 to-slate-100">
-      <div className="w-full max-w-md bg-white p-8 rounded-2xl border border-slate-100 shadow-xl shadow-slate-200/50">
+    <div className="flex-1 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#f0f5f0]/60 via-[#fafcfa] to-[#f0f5f0]/30">
+      <div className="w-full max-w-md bg-white p-8 rounded-3xl border border-[#e1e8e1] shadow-xl shadow-slate-200/50">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-700 mb-4 shadow-inner">
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#f0f5f0] text-[#05893e] mb-4 shadow-inner">
             <UserPlus className="w-7 h-7" />
           </div>
-          <h2 className="text-2xl font-bold text-slate-900">অ্যাকাউন্ট তৈরি করুন</h2>
-          <p className="text-sm text-slate-500 mt-1">
-            বাজার দর পরিবারে যোগ দিন এবং পণ্যের বাজার দর ট্র্যাক করুন।
+          {/* Title from Figma */}
+          <h2 className="text-2xl font-black text-[#1d271f]">অ্যাকাউন্ট তৈরি করুন</h2>
+          {/* Subtitle from Figma */}
+          <p className="text-xs sm:text-sm text-slate-500 mt-1">
+            বিনা খরচে সাইন আপ করে সব বিস্তারিত দাম দেখুন।
           </p>
         </div>
 
         {errorMessage && (
-          <div className="mb-5 p-3 rounded-lg bg-rose-50 border border-rose-200 text-rose-700 text-sm flex items-center gap-2">
+          <div className="mb-5 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs sm:text-sm flex items-center gap-2">
             <span>⚠️</span>
             <span>{errorMessage}</span>
           </div>
@@ -107,52 +108,55 @@ export default function SignUpPage() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1.5">
-              পূর্ণ নাম
+            {/* Label from Figma */}
+            <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+              নাম
             </label>
             <div className="relative">
-              <User className="w-5 h-5 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <User className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="আপনার নাম লিখুন"
+                placeholder="যেমন: রহিম উদ্দিন"
                 required
-                className="w-full pl-11 pr-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition text-sm text-slate-900 bg-slate-50/50 focus:bg-white"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#e1e8e1] focus:outline-none focus:ring-2 focus:ring-[#05893e]/20 focus:border-[#05893e] transition text-sm text-[#1d271f] bg-[#fafcfa] focus:bg-white"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1.5">
-              ইমেইল ঠিকানা
+            {/* Label from Figma */}
+            <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+              ইমেইল
             </label>
             <div className="relative">
-              <Mail className="w-5 h-5 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="your.email@example.com"
                 required
-                className="w-full pl-11 pr-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition text-sm text-slate-900 bg-slate-50/50 focus:bg-white"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#e1e8e1] focus:outline-none focus:ring-2 focus:ring-[#05893e]/20 focus:border-[#05893e] transition text-sm text-[#1d271f] bg-[#fafcfa] focus:bg-white"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1.5">
+            {/* Label from Figma */}
+            <label className="block text-xs font-semibold text-slate-700 mb-1.5">
               পাসওয়ার্ড
             </label>
             <div className="relative">
-              <Lock className="w-5 h-5 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="কমপক্ষে ৬টি অক্ষর"
+                placeholder="কমপক্ষে ৮ অক্ষর"
                 required
-                className="w-full pl-11 pr-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition text-sm text-slate-900 bg-slate-50/50 focus:bg-white"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#e1e8e1] focus:outline-none focus:ring-2 focus:ring-[#05893e]/20 focus:border-[#05893e] transition text-sm text-[#1d271f] bg-[#fafcfa] focus:bg-white"
               />
             </div>
           </div>
@@ -160,16 +164,16 @@ export default function SignUpPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 px-4 rounded-xl font-medium text-white bg-emerald-600 hover:bg-emerald-700 active:scale-[0.99] transition shadow-md shadow-emerald-600/20 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer"
+            className="w-full py-3 px-4 rounded-xl font-bold text-white bg-[#05893e] hover:bg-[#047f39] active:scale-[0.99] transition shadow-md shadow-[#05893e]/20 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer text-sm"
           >
             {loading ? (
               <>
-                <Loader2 className="w-5 h-5 animate-spin" />
+                <Loader2 className="w-4 h-4 animate-spin" />
                 <span>রেজিস্ট্রেশন করা হচ্ছে...</span>
               </>
             ) : (
               <>
-                <span>রেজিস্টার করুন</span>
+                <span>সাইন আপ করুন</span>
                 <ArrowRight className="w-4 h-4" />
               </>
             )}
@@ -178,19 +182,19 @@ export default function SignUpPage() {
 
         <div className="relative my-6">
           <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-slate-200" />
+            <div className="w-full border-t border-[#e1e8e1]" />
           </div>
           <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-white px-3 text-slate-400 font-medium">অথবা সোশ্যাল সাইন আপ</span>
+            <span className="bg-white px-3 text-slate-400 font-semibold">অথবা</span>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
+        <div className="space-y-2.5">
           <button
             type="button"
             onClick={() => handleSocialLogin("google")}
             disabled={socialLoading !== null}
-            className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border border-slate-200 hover:bg-slate-50 text-sm font-medium text-slate-700 transition cursor-pointer disabled:opacity-60"
+            className="w-full flex items-center justify-center gap-2.5 py-2.5 px-3 rounded-xl border border-[#e1e8e1] hover:bg-[#fafcfa] text-xs font-semibold text-slate-700 transition cursor-pointer disabled:opacity-60"
           >
             {socialLoading === "google" ? (
               <Loader2 className="w-4 h-4 animate-spin text-slate-500" />
@@ -214,14 +218,14 @@ export default function SignUpPage() {
                 />
               </svg>
             )}
-            <span>গুগল</span>
+            <span>Google দিয়ে চালিয়ে যান</span>
           </button>
 
           <button
             type="button"
             onClick={() => handleSocialLogin("github")}
             disabled={socialLoading !== null}
-            className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border border-slate-200 hover:bg-slate-50 text-sm font-medium text-slate-700 transition cursor-pointer disabled:opacity-60"
+            className="w-full flex items-center justify-center gap-2.5 py-2.5 px-3 rounded-xl border border-[#e1e8e1] hover:bg-[#fafcfa] text-xs font-semibold text-slate-700 transition cursor-pointer disabled:opacity-60"
           >
             {socialLoading === "github" ? (
               <Loader2 className="w-4 h-4 animate-spin text-slate-500" />
@@ -230,15 +234,16 @@ export default function SignUpPage() {
                 <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
               </svg>
             )}
-            <span>গিটহাব</span>
+            <span>GitHub দিয়ে চালিয়ে যান</span>
           </button>
         </div>
 
-        <div className="mt-8 text-center text-sm text-slate-500">
-          ইতিমধ্যে অ্যাকাউন্ট আছে?{" "}
+        {/* Link from Figma */}
+        <div className="mt-8 text-center text-xs sm:text-sm text-slate-500">
+          অ্যাকাউন্ট আছে?{" "}
           <Link
             href="/signin"
-            className="font-semibold text-emerald-600 hover:text-emerald-700 hover:underline"
+            className="font-bold text-[#05893e] hover:underline"
           >
             সাইন ইন করুন
           </Link>
